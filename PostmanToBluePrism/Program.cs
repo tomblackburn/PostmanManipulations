@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 
 namespace PostmanToBluePrism
 {
@@ -7,6 +6,7 @@ namespace PostmanToBluePrism
     {
         static void Main(string[] args)
         {
+<<<<<<< HEAD
 
             // Read .Json file content from a file location into a variable
             var json = File.ReadAllText(@"C:\Core\Thoughtonomy\Products\Postman\Transunion.postman_collection.json");
@@ -29,6 +29,9 @@ namespace PostmanToBluePrism
 
             // Could import?
 
+=======
+            Console.WriteLine("Hello World!");
+>>>>>>> parent of bbdad56... Read JSON Contents
         }
     }
 }
