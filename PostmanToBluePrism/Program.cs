@@ -1,4 +1,7 @@
-﻿using System;
+﻿using PostmanToBluePrism.Models;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace PostmanToBluePrism
 {
@@ -6,14 +9,13 @@ namespace PostmanToBluePrism
     {
         static void Main(string[] args)
         {
-<<<<<<< HEAD
 
             // Read .Json file content from a file location into a variable
             var json = File.ReadAllText(@"C:\Core\Thoughtonomy\Products\Postman\Transunion.postman_collection.json");
 
-            // Parse that JSON into our Classes/Models
-            Hello 
+            List<Item> pages = new List<Item>();
 
+            // Parse that JSON into our Classes/Models
 
             // Validate Models?
 
@@ -29,9 +31,6 @@ namespace PostmanToBluePrism
 
             // Could import?
 
-=======
-            Console.WriteLine("Hello World!");
->>>>>>> parent of bbdad56... Read JSON Contents
         }
     }
 }
