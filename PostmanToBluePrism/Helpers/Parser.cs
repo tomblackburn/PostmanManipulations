@@ -6,7 +6,6 @@ namespace PostmanToBluePrism.Helpers
 {
     class Parser
     {
-
         public List<Item> ToModel(string json)
         {
             List<Item> pages = new List<Item>();
@@ -51,6 +50,36 @@ namespace PostmanToBluePrism.Helpers
                 pages.Add(i);
             }
             return pages;
+        }
+
+        public Models.Environment EnvToModel(string json)
+        {
+            JObject j = JObject.Parse(json);
+
+            Environment e = new Environment();
+
+            e.name = (string)j["name"];
+            e.id = (string)j["id"];
+            e.timestamp = (long)j["timestamp"];
+
+            var values = j["values"];
+            List<Value> valueList = new List<Value>();
+            foreach (var value in values)
+            {
+                Value v = new Value();
+                v.key = (string)value["key"];
+                v.enabled = (bool)value["enabled"];
+                v.value = (string)value["value"];
+                v.type = (string)value["type"];
+
+                // TODO: Casting needs to be inferred by Type value
+
+                valueList.Add(v);
+            }
+
+            e.values = valueList;
+
+            return e;
         }
     }
 }

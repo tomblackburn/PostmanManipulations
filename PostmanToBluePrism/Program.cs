@@ -13,14 +13,17 @@ namespace PostmanToBluePrism
         static void Main(string[] args)
         {
             var path = @"C:\Core\Thoughtonomy\Products\Postman\Transunion.postman_collection.json";
+            var envPath = @"C:\Core\Thoughtonomy\Products\Postman\Transunion.postman_environment.json";
 
             // Read .Json file content from a file location into a variable
             var json = File.ReadAllText(path);
+            var envJson = File.ReadAllText(envPath);
 
             // Parse that JSON into our Classes/Models
             // TODO: Validate Models?
             Parser p = new Parser();
             List<Item> pages = p.ToModel(json);
+            Models.Environment environment = p.EnvToModel(envJson);
 
             // Create StringBuilder object to hold the object Xml code
             StringBuilder sb = new StringBuilder();
@@ -42,7 +45,7 @@ namespace PostmanToBluePrism
                 "{cleanupEndGuid}"
             };
             foreach (var placeholder in boilerplateGuidPlaceholders) objectBoilerplate = objectBoilerplate.Replace(placeholder, Guid.NewGuid().ToString());
-            objectBoilerplate = objectBoilerplate.Replace("{objectName}", Path.GetFileName(path).Replace(".postman_collection.json",""));
+            objectBoilerplate = objectBoilerplate.Replace("{objectName}", Path.GetFileName(path).Replace(".postman_collection.json", ""));
 
             // Write object boilerplate to the StringBuilder
             sb.Append(objectBoilerplate);
