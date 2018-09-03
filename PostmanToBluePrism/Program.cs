@@ -91,6 +91,18 @@ namespace PostmanToBluePrism
                     headerSb.Append("</collectioninfo><initialvalue><row>");
                     foreach (var header in page.request.header)
                     {
+                        // Check if header value contains reference to environment variable
+                        if (header.value.Contains("{{"))
+                        {
+                            foreach (var value in environment.values)
+                            {
+                                if (value.key == header.value.Replace("{{","").Replace("}}",""))
+                                {
+                                    header.value = value.value;
+                                }
+                            }
+                        }
+
                         headerSb.Append($"<field name=\"{ header.key }\" type=\"text\" value=\"{ header.value }\" />");
                     }
                     headerSb.Append("</row></initialvalue>");
